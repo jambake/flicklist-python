@@ -23,6 +23,12 @@ def valid_pw(name, pw, h):
     salt = h.split(',')[1]
     return h == make_pw_hash(name, pw, salt)
 
+# data|signature
+# data|hash(data + SECRET)
+# to verify, we can split on |,
+# hash(data + SECRET), check if it's equal to
+# data|signature
+
 SECRET = 'czUv86iAN9GXA3MT'
 def hash_str(s):
     return hmac.new(SECRET,s).hexdigest()
